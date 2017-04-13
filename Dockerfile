@@ -1,12 +1,16 @@
 FROM centos:7
-MAINTAINER jaspeen
+MAINTAINER amadorZamora
 
 ADD assets /assets
 
 RUN chmod -R 755 /assets
 RUN /assets/setup.sh
 
-EXPOSE 1521
-EXPOSE 8080
+USER root
+RUN echo "root:password" | chpasswd
+RUN ssh-keygen -A
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+EXPOSE 1521 8080 22
 
 CMD ["/assets/entrypoint.sh"]
