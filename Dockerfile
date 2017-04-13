@@ -2,6 +2,7 @@ FROM centos:7
 MAINTAINER amadorZamora
 
 ADD assets /assets
+ADD dbPackage /tmp/dbPackage
 
 RUN chmod -R 755 /assets
 RUN /assets/setup.sh
